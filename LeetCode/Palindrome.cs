@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace LeetCode
 {
-    public static class Palindrome
+    public static class LongestPalindrome
     {
-        public static string LongestPalindromeFromBack(string s)
+        public static string FromBack(string s)
         {
             // Edge case: empty string.
-            if (s.Length == 0)
+            if (s == null || s.Length == 0)
             {
                 return s;
             }
@@ -62,7 +62,7 @@ namespace LeetCode
             return result;
         }
 
-        public static string LongestPalindromeFromFront(string s)
+        public static string FromFront(string s)
         {
             // Edge case: empty string.
             if (s.Length == 0)
@@ -112,6 +112,11 @@ namespace LeetCode
 
             string result = possiblities.Where(x => x.Length == possiblities.Select(y => y.Length).Max()).First().ToString();
             return result;
+        }
+
+        public static string FromMiddle(string s)
+        {
+            return s;
         }
     }
 }
