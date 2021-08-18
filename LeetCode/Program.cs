@@ -15,51 +15,79 @@ namespace LeetCode
             // Add Two Numbers.
             ListNode l1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
             ListNode l2 = new ListNode(9, new ListNode(9, new ListNode(9)));
-            Console.WriteLine("Add Two Numbers.");
-            Console.WriteLine($"Inputs: [{l1}], [{l2}]");
-            sw.Start();
-            Console.WriteLine($"Output: [{AddTwoNumbers.LinkedList(l1, l2)}]");
-            sw.Stop();
-            Console.WriteLine($"Runtime: {sw.ElapsedMilliseconds} ms.");
-            Console.WriteLine(Environment.NewLine);
+            PrintFunc2Inputs("Add Two Numbers.", l1, l2, AddTwoNumbers.LinkedList);
 
             // Find median sorted arrays.
             int[] nums1 = new int[2] { 1, 2 };
             int[] nums2 = new int[2] { 3, 4 };
-            Console.WriteLine("Find median sorted arrays.");
-            Console.WriteLine($"Input: [{string.Join(",", nums1)}], [{string.Join(",", nums1)}]");
-            sw.Start();
-            Console.WriteLine($"Output: {FindMedian.SortedArrays(nums1, nums2)}");
-            sw.Stop();
-            Console.WriteLine($"Runtime: {sw.ElapsedMilliseconds} ms.");
-            Console.WriteLine(Environment.NewLine);
+            PrintFunc2Inputs("Find median sorted arrays.", nums1, nums2, FindMedian.SortedArrays);
 
             // Find the longested Palindrome.
             // From front.
-            string s1 = "aaaaszdsdkskkksdkfkfosoeeeksdfkefesfaaaaaaaaaaa";
-            Console.WriteLine("Find the longested Palindrome from front.");
-            Console.WriteLine($"Input: {s1}");
-            sw.Start();
-            Console.WriteLine($"Output: {LongestPalindrome.FromFront(s1)}");
-            sw.Stop();
-            Console.WriteLine($"Runtime: {sw.ElapsedMilliseconds} ms.");
-            Console.WriteLine(Environment.NewLine);
+            PrintFunc1Input("Find the longested Palindrome from front.",
+                            "aaaaszdsdkskkksdkfkfosoeeeksdfkefesfaaaaaaaaaaa",
+                            LongestPalindrome.FromFront);
 
             // From back.
-            Console.WriteLine("Find the longested Palindrome from back.");
-            Console.WriteLine($"Input: {s1}");
+            PrintFunc1Input("Find the longested Palindrome from back.",
+                            "aaaaszdsdkskkksdkfkfosoeeeksdfkefesfaaaaaaaaaaa",
+                            LongestPalindrome.FromBack);
+
+            // From middle.
+
+
+            // Find the longest substring without repeating character.
+            PrintFunc1Input("Find the longest substring without repeating character.",
+                            "aaaaszdsdkskkk",
+                            LengthOfLongestSubstring.WithoutRepeatingCharacters);
+        }
+
+        public static void PrintFunc1Input<T1, T2>(string description, T1 input, Func<T1, T2> method)
+        {
+            Stopwatch sw = new Stopwatch();
+
+            Console.WriteLine(description);
+            string printable = string.Empty;
+
+            if (input is Array array)
+            {
+                printable = string.Join(",", array);
+            }
+            else if (input is string)
+            {
+                printable = input.ToString();
+            }
+
+            Console.WriteLine($"Input: {printable}");
             sw.Start();
-            Console.WriteLine($"Output: {LongestPalindrome.FromFront(s1)}");
+            Console.WriteLine($"Output: {method(input)}");
             sw.Stop();
             Console.WriteLine($"Runtime: {sw.ElapsedMilliseconds} ms.");
             Console.WriteLine(Environment.NewLine);
+        }
 
-            // Find the longest substring without repeating character.
-            string s2 = "aaaaszdsdkskkk";
-            Console.WriteLine("Find the longest substring without repeating character.");
-            Console.WriteLine($"Input: {s2}");
+        public static void PrintFunc2Inputs<T1, T2, T3>(string description, T1 input1, T2 input2, Func<T1, T2, T3> method)
+        {
+            Stopwatch sw = new Stopwatch();
+
+            Console.WriteLine(description);
+            string printable1 = string.Empty;
+            string printable2 = string.Empty;
+
+            if (input1 is int[] array1 && input2 is int[] array2)
+            {
+                printable1 = string.Join(",", array1);
+                printable2 = string.Join(",", array2);
+            }
+            else
+            {
+                printable1 = input1.ToString();
+                printable2 = input2.ToString();
+            }
+
+            Console.WriteLine($"Inputs: [{printable1}], [{printable2}]");
             sw.Start();
-            Console.WriteLine($"Output: {LengthOfLongestSubstring.WithoutRepeatingCharacters(s2)}");
+            Console.WriteLine($"Output: [{method(input1, input2)}]");
             sw.Stop();
             Console.WriteLine($"Runtime: {sw.ElapsedMilliseconds} ms.");
             Console.WriteLine(Environment.NewLine);
